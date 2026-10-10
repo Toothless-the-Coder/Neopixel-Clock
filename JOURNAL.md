@@ -42,13 +42,6 @@ I routed the pcb, this is what will connect the esp32c6 to the led ring, I desig
 
 ### 2026-10-08 – I designed a case for the clock that will be mostly 3d printed except for the front plate which will sit in front of the leds, this part will be a piece of frosted acrylic to allow the light from the
 
-**1h**
-
-I designed a case for the clock that will be mostly 3d printed except for the front plate which will sit in front of the leds, this part will be a piece of frosted acrylic to allow the light from the leds to shine through, I also added numbers on the outside of the housing and I designed in a gap for diffusion purposes
-
-![Screenshot 2026-10-08 205348](https://halflife.hackclub-assets.com/hackclub-half-life/sessions/c6Ymgfs9WFtqIB0OnENQKLKARJrHJAeg/567ff5f2e149ee24158008a082bf4dda293959d9ad7a9a498bdcf1d23ad96357.png)
-
-![Screenshot 2026-10-08 205358](https://halflife.hackclub-assets.com/hackclub-half-life/sessions/c6Ymgfs9WFtqIB0OnENQKLKARJrHJAeg/fce059b2b2a83cf75b9419d2fc9198eac353c0a60519fd5a2f8f1fb8d7d2026c.png)
 
 ### 2026-10-09 – I improved the pcb, added a voltage level increase for the data pin on the leds becuase they take 5v data while the esp32 c6 only outputs 3.3v data from its data pins, this goes into the pcb after the
 
