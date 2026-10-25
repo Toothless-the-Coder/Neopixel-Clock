@@ -1,21 +1,68 @@
 # Neopixel-Clock
-This is a neopixel clock that has a custom made pcb at its core, it features an esp32 c6 as the brains, this pulls time information from wifi and translates it into led positions and colors, it has a voltage level step up to give the leds enough power for signal, along similar lines, the board is powered off of its own usb c port instead of the one in the esp32 because otherwise it wouldn't be able to handle the power draw of the leds, there is also a power draw sensor to make sure that the leds don't overload the copper in the pcb or the wall adapter itself, this shouldn't be an issue as there should only ever be three leds lit up at once, but just in case, this is a good idea. I thought of this idea when looking up different things to make for half life week one, I chose this one because I always lose track of time at my desk and it looked like a super cool idea. I had a hard time figuring out how to route the voltage level step up and power draw sensor as I have never used these before. I chose to use a four channel level step up for the voltage from texas instruments because it had plenty of overhead in case of a fault, I'd be less likely to burn it up, I chose the esp32 c6 because it is a very cost efficient piece of hardware that also has very good performance especially when it comes to wifi. I learned a lot about why copper trace thicknesses matter for highish amp applications like this and why you can't just use the regular thin ones.
-| Part | What it's for | Qty | Unit | Total | Vendor |
-| --- | --- | --- | --- | --- | --- |
-| [ESP32-C6](https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/113991254/24613066) | To control everything the clock does, especially sync the time via wifi | 1 | $5.38 | $5.38 | [DigiKey](https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/113991254/24613066) |
-| [LED Ring](https://www.aliexpress.us/item/3256803207953454.html?acnt=708-803-3821&af=3420415&cn=50110&cv=1&dp=Gl6mUn9YQ68-e1GCQDSPebPXFEchmqvH3Q&albag=&albagn=888888&albbt=Google_7_shopping&albch=shopping&albcp=19558607238&ds_e_adid=&ds_e_device=c&ds_e_matchtype=&ds_e_network=x&ds_e_product_channel=online&ds_e_product_country=US&ds_e_product_group_id=&ds_e_product_id=en3256803207953454&ds_e_product_language=en&ds_e_product_merchant_id=109329005&ds_e_product_store_id=&ds_url_v=2&gad_campaignid=19566915268&gad_source=1&gclid=Cj0KCQjwuJLWBhD_ARIsAIBcRUxzrMtQQT-IgJLhkdsSvGBGWGoQ5TpfFMj95M1mT6xmhOsSPZ3VVSoaAlC2EALw_wcB&gclsrc=aw.ds&isSmbAutoCall=false&mtctp=&needSmbHouyi=false&plac=&slnk=&src=google&src=google&LSNSUBSITE=Omitted_Gl6mUn9YQ68&aff_fcid=92957ce6bd2840b68130b67282db1886-1791326930648-09512-_DmYcslv&tt=CPS_NORMAL&aff_fsk=_DmYcslv&aff_platform=portals-tool&sk=_DmYcslv&aff_trace_key=92957ce6bd2840b68130b67282db1886-1791326930648-09512-_DmYcslv&terminal_id=8d373eff4d0e44eca205ec58184c196c) | This is the part that lights up and will show the user the time | 1 | $3.05 | $3.05 | [AliExpress](https://www.aliexpress.us/item/3256803207953454.html?acnt=708-803-3821&af=3420415&cn=50110&cv=1&dp=Gl6mUn9YQ68-e1GCQDSPebPXFEchmqvH3Q&albag=&albagn=888888&albbt=Google_7_shopping&albch=shopping&albcp=19558607238&ds_e_adid=&ds_e_device=c&ds_e_matchtype=&ds_e_network=x&ds_e_product_channel=online&ds_e_product_country=US&ds_e_product_group_id=&ds_e_product_id=en3256803207953454&ds_e_product_language=en&ds_e_product_merchant_id=109329005&ds_e_product_store_id=&ds_url_v=2&gad_campaignid=19566915268&gad_source=1&gclid=Cj0KCQjwuJLWBhD_ARIsAIBcRUxzrMtQQT-IgJLhkdsSvGBGWGoQ5TpfFMj95M1mT6xmhOsSPZ3VVSoaAlC2EALw_wcB&gclsrc=aw.ds&isSmbAutoCall=false&mtctp=&needSmbHouyi=false&plac=&slnk=&src=google&src=google&LSNSUBSITE=Omitted_Gl6mUn9YQ68&aff_fcid=92957ce6bd2840b68130b67282db1886-1791326930648-09512-_DmYcslv&tt=CPS_NORMAL&aff_fsk=_DmYcslv&aff_platform=portals-tool&sk=_DmYcslv&aff_trace_key=92957ce6bd2840b68130b67282db1886-1791326930648-09512-_DmYcslv&terminal_id=8d373eff4d0e44eca205ec58184c196c) |
-| [USB C Power Supply](https://www.aliexpress.us/item/3256804439390949.html?spm=a2g0o.productlist.main.60.19475c0aZJvWQ1&algo_pvid=6ac8d8f6-c4c5-45c2-abcc-80885b1718be&algo_exp_id=6ac8d8f6-c4c5-45c2-abcc-80885b1718be-59&pdp_ext_f=%7B"order"%3A"1079"%2C"eval"%3A"1"%2C"fromPage"%3A"search"%7D&pdp_npi=6%40dis%21USD%213.76%211.09%21%21%2125.09%217.29%21%40210327ef17913279239673715e0d93%2112000029881312605%21sea%21US%210%21ABX%211%210%21n_tag%3A-29910%3Bd%3A25452b6e%3Bm03_new_user%3A-29895%3BpisId%3A5000000210792318&curPageLogUid=juPERgBbFcJT&utparam-url=scene%3Asearch%7Cquery_from%3A%7Cx_object_id%3A1005004625705701%7C_p_origin_prod%3A) | To give the clock the electric breath of life | 1 | $3.74 | $3.74 | [AliExpress](https://www.aliexpress.us/item/3256804439390949.html?spm=a2g0o.productlist.main.60.19475c0aZJvWQ1&algo_pvid=6ac8d8f6-c4c5-45c2-abcc-80885b1718be&algo_exp_id=6ac8d8f6-c4c5-45c2-abcc-80885b1718be-59&pdp_ext_f=%7B"order"%3A"1079"%2C"eval"%3A"1"%2C"fromPage"%3A"search"%7D&pdp_npi=6%40dis%21USD%213.76%211.09%21%21%2125.09%217.29%21%40210327ef17913279239673715e0d93%2112000029881312605%21sea%21US%210%21ABX%211%210%21n_tag%3A-29910%3Bd%3A25452b6e%3Bm03_new_user%3A-29895%3BpisId%3A5000000210792318&curPageLogUid=juPERgBbFcJT&utparam-url=scene%3Asearch%7Cquery_from%3A%7Cx_object_id%3A1005004625705701%7C_p_origin_prod%3A) |
-| [330 ohm resistor](https://www.digikey.com/en/products/detail/stackpole-electronics-inc/CF14JT330R/1741399) | to protect the leds from voltage spikes | 1 | $0.10 | $0.10 | [DigiKey](https://www.digikey.com/en/products/detail/stackpole-electronics-inc/CF14JT330R/1741399) |
-| [1000uF Capacitor](https://www.digikey.com/en/products/detail/nichicon/UVY1E102MPD/2428012) | To protect the 5v line from voltage drops | 1 | $0.94 | $0.94 | [DigiKey](https://www.digikey.com/en/products/detail/nichicon/UVY1E102MPD/2428012) |
-| [PCB](https://cart.jlcpcb.com/shopcart/cart/) | To connect everything together | 1 | $9.43 | $9.43 | [JLC](https://cart.jlcpcb.com/shopcart/cart/) |
-| [.1uF Capacitor](https://www.digikey.com/en/products/detail/kemet/C320C104K5R5TA/818040) | To stabilize the power draw sensor and the voltage step up chip | 2 | $1.49 | $2.98 | [DigiKey](https://www.digikey.com/en/products/detail/kemet/C320C104K5R5TA/818040) |
-| [.1 ohm resistor](https://www.digikey.com/en/products/detail/yageo/MFR-25FRF52-1R/9138909?gclsrc=aw.ds&gad_source=1&gad_campaignid=24316524447&gclid=Cj0KCQjwxKfWBhDkARIsAMKwkNbdyAH9QI8zGlSat6E793I1m-wscwRiCbKoujHfb8WhmawSYZJP0iYaAg_hEALw_wcB) | to connect in+and in- on the power draw sensor and make it work | 1 | $0.11 | $0.11 | [DigiKey](https://www.digikey.com/en/products/detail/yageo/MFR-25FRF52-1R/9138909?gclsrc=aw.ds&gad_source=1&gad_campaignid=24316524447&gclid=Cj0KCQjwxKfWBhDkARIsAMKwkNbdyAH9QI8zGlSat6E793I1m-wscwRiCbKoujHfb8WhmawSYZJP0iYaAg_hEALw_wcB) |
-| [.1](https://www.digikey.com/en/products/detail/yageo/MFR-25FTE52-5K1/9140307?gclsrc=aw.ds&gad_source=1&gad_campaignid=20232005509&gclid=Cj0KCQjwxKfWBhDkARIsAMKwkNbc953vPID20le2-wQnfq6AhBALVSEGC9ttpe5hYnO-a4cIg9TDXbkaAjyVEALw_wcB) | to make the usbc port work by connecting cc1 and cc2 to ground | 2 | $0.10 | $0.20 | [DigiKey](https://www.digikey.com/en/products/detail/yageo/MFR-25FTE52-5K1/9140307?gclsrc=aw.ds&gad_source=1&gad_campaignid=20232005509&gclid=Cj0KCQjwxKfWBhDkARIsAMKwkNbc953vPID20le2-wQnfq6AhBALVSEGC9ttpe5hYnO-a4cIg9TDXbkaAjyVEALw_wcB) |
-| [Voltage step up](https://www.digikey.com/en/products/detail/texas-instruments/SN74AHCT125N/375798) | to increase the signal voltage from the esp32 so the leds can respond properly | 1 | $1.00 | $1.00 | [DigiKey](https://www.digikey.com/en/products/detail/texas-instruments/SN74AHCT125N/375798) |
-| [Power draw sensor](https://www.digikey.com/en/products/detail/texas-instruments/INA219BIDCNR/2596849?gclsrc=aw.ds&gad_source=1&gad_campaignid=20228387720&gclid=Cj0KCQjwxKfWBhDkARIsAMKwkNYTSTXHeXqxE9pccIyg8gj_Y1BLtkPWQvhckb9jKLN0yWNc_GIX_skaAhVfEALw_wcB) | to monitor how much power the leds are using and then tell the esp32 so it can react appropriately | 1 | $2.16 | $2.16 | [DigiKey](https://www.digikey.com/en/products/detail/texas-instruments/INA219BIDCNR/2596849?gclsrc=aw.ds&gad_source=1&gad_campaignid=20228387720&gclid=Cj0KCQjwxKfWBhDkARIsAMKwkNYTSTXHeXqxE9pccIyg8gj_Y1BLtkPWQvhckb9jKLN0yWNc_GIX_skaAhVfEALw_wcB) |
-| [USB C Port](https://www.digikey.ca/en/products/detail/gct/USB4125-GF-A/13547384) | To allow the clock to recieve wall power | 1 | $0.91 | $0.91 | [DigiKey](https://www.digikey.ca/en/products/detail/gct/USB4125-GF-A/13547384) |
+
+## Overview
+
+This is a Neopixel clock that has a custom-made PCB at its core. It features an ESP32-C6 as the brains, which pulls time information from Wi-Fi and translates it into LED positions and colors.
+
+It has a voltage level step-up to give the LEDs enough power for the signal. Along similar lines, the board is powered off of its own USB-C port instead of the one on the ESP32, because otherwise it wouldn't be able to handle the power draw of the LEDs.
+
+There is also a power draw sensor to make sure that the LEDs don't overload the copper in the PCB or the wall adapter itself. This shouldn't be an issue, as there should only ever be three LEDs lit up at once, but just in case, this is a good idea.
+
+## Why I Made This
+
+I thought of this idea when looking up different things to make for Half Life Week One. I chose this one because I always lose track of time at my desk, and it looked like a super cool idea.
+
+## Challenges and What I Learned
+
+I had a hard time figuring out how to route the voltage level step-up and power draw sensor, as I have never used these before.
+
+I chose to use a four-channel level step-up from Texas Instruments because it had plenty of overhead in case of a fault, so I'd be less likely to burn it up. I chose the ESP32-C6 because it is a very cost-efficient piece of hardware that also has very good performance, especially when it comes to Wi-Fi.
+
+I learned a lot about why copper trace thicknesses matter for high-ish amp applications like this and why you can't just use the regular thin ones.
+
+## Features
+
+- **Wi-Fi time synchronization:** The ESP32-C6 pulls time information over Wi-Fi.
+- **LED time display:** The Neopixel LED ring displays the time using LED positions and colors.
+- **Dedicated USB-C power:** The PCB has its own USB-C port to handle the LEDs' power draw.
+- **Voltage level shifting:** A level shifter helps the LED signal reach the required voltage.
+- **Power monitoring:** A power draw sensor monitors how much power the LEDs are using so the ESP32 can react appropriately.
+- **PCB designed for higher current:** The board accounts for the importance of copper trace thickness when handling higher current.
+
+## Bill of Materials (BOM)
+
+The following table lists the parts used in the project, what they do, and their costs.
+
+| Part | What it's for | Qty | Unit Price | Total | Vendor |
+| --- | --- | ---: | ---: | ---: | --- |
+| [ESP32-C6](https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/113991254/24613066) | To control everything the clock does, especially syncing the time via Wi-Fi | 1 | $5.38 | $5.38 | [DigiKey](https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/113991254/24613066) |
+| [LED Ring](https://www.aliexpress.us/item/3256803207953454.html) | This is the part that lights up and will show the user the time | 1 | $3.05 | $3.05 | [AliExpress](https://www.aliexpress.us/item/3256803207953454.html) |
+| [USB-C Power Supply](https://www.aliexpress.us/item/3256804439390949.html) | To give the clock the electric breath of life | 1 | $3.74 | $3.74 | [AliExpress](https://www.aliexpress.us/item/3256804439390949.html) |
+| [330 ohm resistor](https://www.digikey.com/en/products/detail/stackpole-electronics-inc/CF14JT330R/1741399) | To protect the LEDs from voltage spikes | 1 | $0.10 | $0.10 | [DigiKey](https://www.digikey.com/en/products/detail/stackpole-electronics-inc/CF14JT330R/1741399) |
+| [1000uF Capacitor](https://www.digikey.com/en/products/detail/nichicon/UVY1E102MPD/2428012) | To protect the 5V line from voltage drops | 1 | $0.94 | $0.94 | [DigiKey](https://www.digikey.com/en/products/detail/nichicon/UVY1E102MPD/2428012) |
+| [PCB](https://cart.jlcpcb.com/shopcart/cart/) | To connect everything together | 1 | $9.43 | $9.43 | [JLCPCB](https://cart.jlcpcb.com/shopcart/cart/) |
+| [0.1uF Capacitor](https://www.digikey.com/en/products/detail/kemet/C320C104K5R5TA/818040) | To stabilize the power draw sensor and the voltage step-up chip | 2 | $1.49 | $2.98 | [DigiKey](https://www.digikey.com/en/products/detail/kemet/C320C104K5R5TA/818040) |
+| [0.1 ohm resistor](https://www.digikey.com/en/products/detail/yageo/MFR-25FRF52-1R/9138909) | To connect IN+ and IN- on the power draw sensor and make it work | 1 | $0.11 | $0.11 | [DigiKey](https://www.digikey.com/en/products/detail/yageo/MFR-25FRF52-1R/9138909) |
+| [5.1k ohm resistor](https://www.digikey.com/en/products/detail/yageo/MFR-25FTE52-5K1/9140307) | To make the USB-C port work by connecting CC1 and CC2 to ground | 2 | $0.10 | $0.20 | [DigiKey](https://www.digikey.com/en/products/detail/yageo/MFR-25FTE52-5K1/9140307) |
+| [Voltage step-up](https://www.digikey.com/en/products/detail/texas-instruments/SN74AHCT125N/375798) | To increase the signal voltage from the ESP32 so the LEDs can respond properly | 1 | $1.00 | $1.00 | [DigiKey](https://www.digikey.com/en/products/detail/texas-instruments/SN74AHCT125N/375798) |
+| [Power draw sensor](https://www.digikey.com/en/products/detail/texas-instruments/INA219BIDCNR/2596849) | To monitor how much power the LEDs are using and then tell the ESP32 so it can react appropriately | 1 | $2.16 | $2.16 | [DigiKey](https://www.digikey.com/en/products/detail/texas-instruments/INA219BIDCNR/2596849) |
+| [USB-C Port](https://www.digikey.ca/en/products/detail/gct/USB4125-GF-A/13547384) | To allow the clock to receive wall power | 1 | $0.91 | $0.91 | [DigiKey](https://www.digikey.ca/en/products/detail/gct/USB4125-GF-A/13547384) |
 | **Parts subtotal** | — | — | — | **$30.00** | — |
 | **Tax & shipping** | — | — | — | **$0.00** | — |
 | **Total** | — | — | — | **$30.00** | — |
-![image](https://halflife.hackclub-assets.com/hackclub-half-life/sessions/c6Ymgfs9WFtqIB0OnENQKLKARJrHJAeg/80fc74de5ff8dcf25af338c02f701b2edc3e88b9d86cc93c09ba69cd2b52bfe6.png)
-<img width="938" height="914" alt="image" src="https://github.com/user-attachments/assets/fb30aa63-ab14-4262-88cf-9c5137b3fb08" />
+
+## Project Images
+
+### Project Inspiration
+
+![Half Life Week One project inspiration](https://halflife.hackclub-assets.com/hackclub-half-life/sessions/c6Ymgfs9WFtqIB0OnENQKLKARJrHJAeg/80fc74de5ff8dcf25af338c02f701b2edc3e88b9d86cc93c09ba69cd2b52bfe6.png)
+
+### PCB Design
+
+<img width="938" height="914" alt="Neopixel clock PCB design" src="https://github.com/user-attachments/assets/fb30aa63-ab14-4262-88cf-9c5137b3fb08" />
+
+## Final Thoughts
+
+This project has been a great way to learn more about PCB design, power management, and working with components I haven't used before. It was especially interesting to learn how much trace thickness matters when you're dealing with higher current.
+
+
