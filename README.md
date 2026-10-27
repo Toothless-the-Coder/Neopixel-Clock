@@ -60,6 +60,9 @@ The following table lists the parts used in the project, what they do, and their
 ### PCB Design
 
 <img width="938" height="914" alt="Neopixel clock PCB design" src="https://github.com/user-attachments/assets/fb30aa63-ab14-4262-88cf-9c5137b3fb08" />
+<img width="1197" height="855" alt="image" src="https://github.com/user-attachments/assets/5c7ce0d2-76f1-452d-a572-9c69d3a35ba7" />
+<img width="592" height="362" alt="Screenshot 2026-10-27 162851" src="https://github.com/user-attachments/assets/7276ad9c-5d5c-4b7c-96e9-05871782d309" />
+
 
 ## Final Thoughts
 
